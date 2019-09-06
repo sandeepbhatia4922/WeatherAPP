@@ -17,13 +17,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val response: MutableLiveData<CurrentWeatherResponse> = MutableLiveData()
 
-    fun getCurrentWeatherDetails(ctx: Context) {
+    fun getCurrentWeatherDetails(ctx: Context,city:String) {
         val dialog = Dialog(ctx)
         dialog.setTitle("loading")
         dialog.setCancelable(false)
         dialog.show()
         val apiService = ApiClient.create()
-        var observable = apiService.currentWeather(ApiClient.KEY, "delhi")
+        var observable = apiService.currentWeather(ApiClient.KEY, city)
 
         observable.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
